@@ -1,92 +1,28 @@
 import { CadViewer } from "src/CadViewer"
 
 /**
- * Reproduction story for unfixed extra copper pads protruding beyond board edges and corner cutouts.
- *
- * When plated holes (circular, pill, or rectangular pads) are placed on the outer board perimeter
- * or at the corners of a board (e.g. castellated pads, mounting holes, or corner cutouts),
- * their copper annular rings and pads extend outside the PCB boundary into empty space.
+ * Super simple reproduction: A single large plated hole placed on the board edge
+ * creating a half/semi-circular cutout, demonstrating the extra copper pad
+ * protruding outside the board boundary.
  */
-export const BoardWithCornerAndEdgePlatedHoles = () => (
+export const SingleBigEdgeSemiHole = () => (
   <CadViewer>
     <board width="20mm" height="20mm">
-      {/* 1. Corner Plated Holes (Protrude in both X and Y directions) */}
-      <platedhole
-        shape="circle"
-        pcbX={10}
-        pcbY={10}
-        holeDiameter={2}
-        outerDiameter={4}
-      />
-      <platedhole
-        shape="circle"
-        pcbX={-10}
-        pcbY={10}
-        holeDiameter={2}
-        outerDiameter={4}
-      />
-      <platedhole
-        shape="circle"
-        pcbX={10}
-        pcbY={-10}
-        holeDiameter={2}
-        outerDiameter={4}
-      />
-      <platedhole
-        shape="circle"
-        pcbX={-10}
-        pcbY={-10}
-        holeDiameter={2}
-        outerDiameter={4}
-      />
-
-      {/* 2. Edge Plated Holes (Protrude past board edges) */}
+      {/* One single large plated hole on the right edge (x = 10mm) */}
       <platedhole
         shape="circle"
         pcbX={10}
         pcbY={0}
-        holeDiameter={2}
-        outerDiameter={5}
-      />
-      <platedhole
-        shape="circle"
-        pcbX={-10}
-        pcbY={0}
-        holeDiameter={1}
-        outerDiameter={3}
-      />
-      <platedhole
-        shape="circle"
-        pcbX={0}
-        pcbY={10}
-        holeDiameter={2}
-        outerDiameter={4}
-      />
-      <platedhole
-        shape="circle"
-        pcbX={0}
-        pcbY={-10}
-        holeDiameter={2}
-        outerDiameter={4}
-      />
-
-      {/* 3. Rectangular / Pill Pad on Edge */}
-      <platedhole
-        shape="circular_hole_with_rect_pad"
-        holeDiameter={1.5}
-        rectPadWidth={3}
-        rectPadHeight={3}
-        pcbX={5}
-        pcbY={10}
+        holeDiameter={6}
+        outerDiameter={10}
       />
     </board>
   </CadViewer>
 )
 
-BoardWithCornerAndEdgePlatedHoles.storyName =
-  "Corner & Edge Plated Holes with Protruding Copper"
+SingleBigEdgeSemiHole.storyName = "Single Big Edge Semi-Hole (Repro)"
 
 export default {
-  title: "Bugs/Corner & Edge Plated Hole Cutout",
-  component: BoardWithCornerAndEdgePlatedHoles,
+  title: "Bugs/Single Big Edge Semi-Hole",
+  component: SingleBigEdgeSemiHole,
 }
